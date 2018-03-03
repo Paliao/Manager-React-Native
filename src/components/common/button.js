@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     borderColor: '#1263aa',
     marginLeft: 15,
     marginRight: 15,
-    height: 35
+    padding: 20
   }
 })
 

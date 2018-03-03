@@ -5,6 +5,7 @@ import { createStore } from 'redux'
 import firebase from 'firebase'
 
 import reducers from './src/reducers'
+import LoginForm from './src/components/loginForm'
 
 const store = createStore(reducers)
 
@@ -25,7 +26,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <View style={{flex: 1}}>
-          <Text>Hello!</Text>
+          <LoginForm />
         </View>
       </Provider>
     )
