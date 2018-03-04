@@ -4,3 +4,10 @@ export function emailChanged(text) {
     payload: text
   }
 }
+
+export function passwordChanged(text) {
+  return {
+    type: 'PASSWORD_CHANGED',
+    payload: text
+  }
+}
