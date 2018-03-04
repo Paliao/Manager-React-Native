@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
+import { emailChanged } from '../actions'
 import { Card, CardSection, Field, Button } from './common'
 
 class LoginForm extends Component {
-
-  onEmailChange(text) {
-
-  }
 
   render() {
     return(
@@ -16,7 +14,8 @@ class LoginForm extends Component {
           <Field
             label='Email'
             placeholder='email@gmail.com'
-            onChangeText={this.onEmailChange.bind(this)}
+            onChangeText={this.props.emailChanged}
+            value={this.props.email}
           />
         </CardSection>
 
@@ -33,4 +32,6 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(null, { emailChanged })(LoginForm)
+const mapStateToProps = state => ({ email: state.auth.email })
+const mapDispatchToProps = dispatch => bindActionCreators({ emailChanged }, dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
