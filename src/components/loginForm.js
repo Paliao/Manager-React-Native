@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { emailChanged, passwordChanged, loginUser } from '../actions'
-import { Card, CardSection, Field, Button, ErrorMessage } from './common'
+import { Card, CardSection, Field, Button, ErrorMessage, Spinner } from './common'
 
 class LoginForm extends Component {
 
@@ -19,6 +19,19 @@ class LoginForm extends Component {
         <ErrorMessage error={this.props.error} />
       )
     }
+  }
+
+  spinnerOrButton() {
+    if(this.props.loading) {
+      return <Spinner />
+    }
+
+    return (
+      <Button
+        text='Login'
+        onPress={this.logInPress.bind(this)}
+      />
+    )
   }
 
   render() {
@@ -46,10 +59,9 @@ class LoginForm extends Component {
 
         {this.renderError()}
 
-        <Button
-        text='Login'
-        onPress={this.logInPress.bind(this)}
-        />
+        <CardSection>
+          {this.spinnerOrButton()}
+        </CardSection>
       </Card>
     )
   }
@@ -58,7 +70,8 @@ class LoginForm extends Component {
 const mapStateToProps = state => ({ 
   email: state.auth.email,
   password: state.auth.password,
-  error: state.auth.error
+  error: state.auth.error,
+  loading: state.auth.loading
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

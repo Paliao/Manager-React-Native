@@ -15,16 +15,16 @@ export function passwordChanged(text) {
 }
 
 export function loginUser({ email, password }) {
-  return dispatch => (
-    firebase.auth().signInWithEmailAndPassword( email, password )
-      .then(user => loginUser(dispatch, user) )
-      .catch(() => {
+  return dispatch => {
+    dispatch({ type: 'LOGIN_USER' })
+    firebase.auth().signInWithEmailAndPassword( email, password)
+      .then(user => userLogged(dispatch, user))
+      .catch(() => (
         firebase.auth().createUserWithEmailAndPassword( email, password )
-          .then( user => loginUser(dispatch, user))
-          .catch(() => loginUserFail(dispatch))
-      }
-    )
-  )
+          .then(user => userLogged(dispatch, user))
+          .catch(() => loginUserFail( dispatch ))
+      ))
+  }
 }
 
 const loginUserFail = dispatch => {
