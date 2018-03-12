@@ -4,9 +4,16 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { Card, CardSection, Field, Button } from './common'
-import { employeeUpdate } from '../actions/employeeActions'
+import { employeeUpdate, employeeCreate } from '../actions/employeeActions'
 
 class EmployeeCreate extends Component {
+
+  onButtonPress() {
+    const { name, phone, shift } = this.props
+
+    this.props.employeeCreate({ name, phone, shift: shift || 'Monday' })
+  }
+
   render() {
     return (
       <Card>
@@ -47,6 +54,7 @@ class EmployeeCreate extends Component {
         <CardSection>
           <Button
             text='Create'
+            onPress={this.onButtonPress.bind(this)}
           />
         </CardSection>
       </Card>
@@ -65,6 +73,6 @@ const mapStateToProps = state => {
   return { name, phone, shift } = state.employee
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ employeeUpdate }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ employeeUpdate, employeeCreate }, dispatch)
 
 export default connect( mapStateToProps, mapDispatchToProps )(EmployeeCreate)
