@@ -12,6 +12,14 @@ const store = applyMiddleware(thunk)(createStore)(reducers)
 
 export default class App extends Component {
 
+  constructor() {
+    super()
+
+    console.ignoredYellowBox = [
+      'Setting a timer'
+    ]
+}
+
   componentWillMount() {
     firebase.initializeApp({
         apiKey: "AIzaSyCnVsqjhRjHZdEE5EzdZhAY0pqmqYX9C54",
