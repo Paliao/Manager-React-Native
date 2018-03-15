@@ -1,17 +1,10 @@
-const INITIAL_STATE = {
-  name: '',
-  phone: '',
-  shift: ''
-}
+const INITIAL_STATE = {}
 
-export default (state = INITIAL_STATE, action) => {
-  console.log(action)
-  switch (action.type) {
-    case 'EMPLOYEE_UPDATED':
-      return { ...state,  [action.payload.prop]: action.payload.value }
-    case 'CLEAR_CREATE_FORM':
-      return INITIAL_STATE
-    default:
+export default ( state = INITIAL_STATE, action ) {
+  switch(action.type) {
+    case 'EMPLOYEES_FETCHED': 
+      return action.payload
+    default: 
       return state
   }
 }
